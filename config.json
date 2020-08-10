@@ -1,0 +1,10 @@
+{
+    "token":"NzQyMzY2MzAxMTcwODI3Mjc0.XzFEfg.U7Q3hSdL5pF30e7COkwpGD5fPWM",
+    "serveurid":"734538594559066213",
+    "alertchannelid":"734538594559066216",
+    "managechannelid":"742356558842822687",
+    "prefix":"+",
+    "delaymin":"30",
+    "mentions":"@here",
+    "messageformat":"```css\n[%name]\n%episode```\n%url"
+ }
