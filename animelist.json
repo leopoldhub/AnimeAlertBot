@@ -1,0 +1,195 @@
+{
+   "0":{
+      "name":"Assasination Classroom",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/7702-ansatsu-kyoushitsu-tv",
+               "https://www.neko-sama.fr/anime/info/8046-ansatsu-kyoushitsu-tv-2"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/assassination-classroom-saison-1-01-vf/",
+               "http://voiranime.com/assassination-classroom-saison-2-01-vf/"
+            ]
+         }
+      }
+   },
+   "1":{
+      "name":"Attaque des Titans",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/6604-shingeki-no-kyojin",
+               "https://www.neko-sama.fr/anime/info/7896-shingeki-no-kyojin-2",
+               "https://www.neko-sama.fr/anime/info/9109-shingeki-no-kyojin-3"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/shingeki-no-kyojin-attaque-des-titans-01-vf/",
+               "http://voiranime.com/shingeki-no-kyojin-attaque-des-titans-saison-2-01-vf/",
+               "https://www.neko-sama.fr/anime/info/9109-shingeki-no-kyojin-3 (vostfr)"
+            ]
+         }
+      }
+   },
+   "2":{
+      "name":"Tokyo Ghoul",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/7555-tokyo-ghoul",
+               "https://www.neko-sama.fr/anime/info/7794-tokyo-ghoul-a",
+               "https://www.neko-sama.fr/anime/info/9299-tokyo-ghoul-re",
+               "https://www.neko-sama.fr/anime/info/14023-tokyo-ghoul-re-2nd-season"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/tokyo-ghoul-01-vf/",
+               "http://voiranime.com/tokyo-ghoul-va-saison-2-01-vf/",
+               "https://www.neko-sama.fr/anime/info/9299-tokyo-ghoul-re (vostfr)",
+               "https://www.neko-sama.fr/anime/info/14023-tokyo-ghoul-re-2nd-season (vostfr)"
+            ]
+         }
+      }
+   },
+   "3":{
+      "name":"Demon Slayer",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/10932-kimetsu-no-yaiba"
+            ]
+         }
+      }
+   },
+   "4":{
+      "name":"Seven Deadly Sins",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/7735-nanatsu-no-taizai",
+               "https://www.neko-sama.fr/anime/info/9164-nanatsu-no-taizai-imashime-no-fukkatsu",
+               "https://www.neko-sama.fr/anime/info/16019-nanatsu-no-taizai-kamigami-no-gekirin"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/nanatsu-no-taizai-saison-1-01-vf/",
+               "https://www.neko-sama.fr/anime/info/9164-nanatsu-no-taizai-imashime-no-fukkatsu (vostfr)",
+               "https://www.neko-sama.fr/anime/info/16019-nanatsu-no-taizai-kamigami-no-gekirin (vostfr)"
+            ]
+         }
+      }
+   },
+   "5":{
+      "name":"Jojo’s Bizarre Adventure",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/6339-jojo-no-kimyou-na-bouken-2001",
+               "https://www.neko-sama.fr/anime/info/7431-jojo-no-kimyou-na-bouken-stardust-crusaders",
+               "https://www.neko-sama.fr/anime/info/7744-jojo-no-kimyou-na-bouken-stardust-crusaders-egypt-hen",
+               "https://www.neko-sama.fr/anime/info/8286-jojo-no-kimyou-na-bouken-diamond-wa-kudakenai",
+               "https://www.neko-sama.fr/anime/info/14175-jojo-no-kimyou-na-bouken-ougon-no-kaze"
+            ]
+         }
+      }
+   },
+   "6":{
+      "name":"FullMetal Alchemist",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/101-hagane-no-renkinjutsushi",
+               "https://www.neko-sama.fr/anime/info/3458-hagane-no-renkinjutsushi-fullmetal-alchemist"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/fullmetal-alchemist-01-vf/",
+               "http://voiranime.com/fullmetal-alchemist-brotherhood-01-vf/"
+            ]
+         }
+      }
+   },
+   "7":{
+      "name":"Blue Exorcist",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/5228-ao-no-exorcist",
+               "https://www.neko-sama.fr/anime/info/8613-ao-no-exorcist-2"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/ao-no-blue-exorcist-saison-1-01-vf/",
+               "https://www.neko-sama.fr/anime/info/8613-ao-no-exorcist-2 (vostfr)"
+            ]
+         }
+      }
+   },
+   "8":{
+      "name":"The Promised Neverland",
+      "languages":{
+         "0":{
+            "name":"vostfr/vf",
+            "seasons":[
+               "https://animedigitalnetwork.fr/video/the-promised-neverland"
+            ]
+         }
+      }
+   },
+   "9":{
+      "name":"Sword Art Online",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/5821-sword-art-online",
+               "https://www.neko-sama.fr/anime/info/7545-sword-art-online-ii",
+               "https://www.neko-sama.fr/anime/info/9289-sword-art-online-alicization",
+               "https://www.neko-sama.fr/anime/info/15966-sword-art-online-alicization-war-of-underworld"
+            ]
+         },
+         "1":{
+            "name":"vf",
+            "seasons":[
+               "http://voiranime.com/sword-art-online-saison-1-01-vf/",
+               "http://voiranime.com/sword-art-online-saison-2-01-vf/",
+               "https://www.neko-sama.fr/anime/info/9289-sword-art-online-alicization (vostfr)",
+               "https://www.neko-sama.fr/anime/info/15966-sword-art-online-alicization-war-of-underworld (vostfr)"
+            ]
+         }
+      }
+   },
+   "10":{
+      "name":"High School of the Dead",
+      "languages":{
+         "0":{
+            "name":"vostfr",
+            "seasons":[
+               "https://www.neko-sama.fr/anime/info/4536-gakuen-mokushiroku-highschool-of-the-dead"
+            ]
+         }
+      }
+   }
+}

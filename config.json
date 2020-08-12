@@ -1,10 +1,10 @@
 {
-    "token":"NzQyMzY2MzAxMTcwODI3Mjc0.XzFEfg.U7Q3hSdL5pF30e7COkwpGD5fPWM",
-    "serveurid":"734538594559066213",
-    "alertchannelid":"734538594559066216",
-    "managechannelid":"742356558842822687",
+    "token":"xxxxxxxxxxxxx",
+    "serveurid":"691678427345977424",
+    "alertchannelid":"742377839277375580",
+    "managechannelid":"742377068570083396",
     "prefix":"+",
     "delaymin":"30",
-    "mentions":"@here",
+    "mentions":"<@&742462864639524984>",
     "messageformat":"```css\n[%name]\n%episode```\n%url"
  }

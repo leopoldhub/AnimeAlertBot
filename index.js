@@ -10,8 +10,10 @@ const Discord = require("discord.js");
 const https = require("https");
 const fs = require('fs');
 
+process.setMaxListeners(0);
+
 var config = {
-    "token":"NzQyMzY2MzAxMTcwODI3Mjc0.XzFEfg.U7Q3hSdL5pF30e7COkwpGD5fPWM",
+    "token":"xxxxxxxxxxxxx",
     "serveurid":"734538594559066213",
     "alertchannelid":"734538594559066216",
     "managechannelid":"742356558842822687",
@@ -22,6 +24,7 @@ var config = {
  };
 
 var jsonprevious = JSON.parse("[]");
+var jsonanimelist = JSON.parse("{}");
 
 const client = new Discord.Client();
 
@@ -43,6 +46,7 @@ var options = {
 };
 
 function getLastOut(){
+    console.log('parsing');
     var req = https.request(options, function(response) {
         var str = ''
         response.on('data', function (chunk) {
@@ -99,6 +103,19 @@ function runtime(){
     }, config.delaymin * 3600 * 1000);
 }
 
+function saveStaffList(){
+    fs.writeFileSync('animelist.json', JSON.stringify(jsonanimelist));
+}
+
+function readStaffList(){
+    if(!fs.existsSync('animelist.json')) {
+        fs.writeFileSync('animelist.json', JSON.stringify(jsonanimelist));
+    }
+    var contents = fs.readFileSync("animelist.json");
+    jsonanimelist = JSON.parse(contents);
+    console.log('anime list parsed!');
+}
+
 function savePrevious(){
     fs.writeFileSync('previous.json', JSON.stringify(jsonprevious));
 }
@@ -128,6 +145,7 @@ function readConfigs(){
 function reload(){
     readConfigs();
     readPrevious();
+    readStaffList();
     setTimeout(function() {
         if(client.user == null){
             client.login(config.token);
@@ -142,6 +160,27 @@ client.on('ready', () => {
     runtime();
 });
 
+var reactNumberMap = new Map();
+
+reactNumberMap.set(0,"0⃣");
+reactNumberMap.set(1,"1⃣");
+reactNumberMap.set(2,"2⃣");
+reactNumberMap.set(3,"3⃣");
+reactNumberMap.set(4,"4⃣");
+reactNumberMap.set(5,"5⃣");
+reactNumberMap.set(6,"6⃣");
+reactNumberMap.set(7,"7⃣");
+reactNumberMap.set(8,"8⃣");
+reactNumberMap.set(9,"9⃣");
+reactNumberMap.set(10,"🔟");
+
+function getByValue(map, searchValue) {
+    for (let [key, value] of map.entries()) {
+      if (value === searchValue)
+        return key;
+    }
+}
+
 client.on('message', (msg) => {
     if(msg.channel.id == config.managechannelid){
         if(msg.content.startsWith(config.prefix+"help")){
@@ -154,6 +193,10 @@ client.on('message', (msg) => {
                 +config.prefix+"setalert <channel id> (set bot alert channel)"+"\n"
                 +config.prefix+"setmentions <roles to mention: (Ex: @here @alertés)>"+"\n"
                 +config.prefix+"reload"+"\n"
+                +config.prefix+"setanime <anime id (0-10)> <nom>"+"\n"
+                +config.prefix+"remanime <anime id (0-10)>"+"\n"
+                +config.prefix+"setlang <anime id (0-10)> <lang id (0-10)> <nom>"+"\n"
+                +config.prefix+"addseason <anime id (0-10)> <lang id (0-10)> <url>"+"\n"
                 +config.prefix+"credits"+"\n"
                 +'```')
         }else if(msg.content.startsWith(config.prefix+"prefix ")){
@@ -198,6 +241,98 @@ client.on('message', (msg) => {
             config["mentions"] = msg.content.split(config.prefix+"setmentions ")[1];
             saveConfigs();
             msg.channel.send("les roles a mentionner a chaque alertes ont étés définis a: ```"+config["mentions"]+"```");
+        }else if(msg.content.startsWith(config.prefix+"setanime ")){
+            var args = msg.content.split(config.prefix+"setanime ")[1].split(" ");
+            if(args.length >= 2){
+                if(!isNaN(args[0]) && args[0] <= 10 && args[0] >= 0){
+                    var animeindex = args[0];
+                    args.shift();
+                    var name = "";
+                    for(var arg in args){
+                        name = name+" "+args[arg];
+                    }
+                    name = name.substring(1,name.length);
+                    jsonanimelist[animeindex] = {
+                        name:name,
+                        languages:{}
+                    }
+                    saveStaffList();
+                    msg.channel.send(name+" a été ajouté avec succes a l'index "+animeindex);
+                }else{
+                    msg.channel.send("Erreur: merci de respecter l'utilisation de cette commande");
+                }
+            }
+        }else if(msg.content.startsWith(config.prefix+"remanime ")){
+            var args = msg.content.split(config.prefix+"remanime ")[1].split(" ");
+            if(args.length >= 1){
+                if(!isNaN(args[0]) && args[0] <= 10 && args[0] >= 0){
+                    var animeindex = args[0];
+                    if(jsonanimelist[animeindex] != undefined && jsonanimelist[animeindex] != null){
+                        delete jsonanimelist[animeindex];
+                        saveStaffList();
+                        msg.channel.send("l'animé a l'index "+animeindex+" a été supprimé avec succes");
+                    }else{
+                        msg.channel.send("Erreur: l'index ne correspond a aucun animé");
+                    }
+                }else{
+                    msg.channel.send("Erreur: merci de respecter l'utilisation de cette commande");
+                }
+            }
+        }else if(msg.content.startsWith(config.prefix+"setlang ")){
+            var args = msg.content.split(config.prefix+"setlang ")[1].split(" ");
+            if(args.length >= 3){
+                if(!isNaN(args[0]) && args[0] <= 10 && args[0] >= 0 && !isNaN(args[1]) && args[1] <= 10 && args[1] >= 0){
+                    var animeindex = args[0];
+                    var langindex = args[1];
+                    args.shift();
+                    args.shift();
+                    var lngname = "";
+                    for(var arg in args){
+                        lngname = lngname+" "+args[arg];
+                    }
+                    lngname = lngname.substring(1,lngname.length);
+                    if(jsonanimelist[animeindex] != undefined && jsonanimelist[animeindex] != null){
+                        jsonanimelist[animeindex]["languages"][langindex] = {
+                            name:lngname,
+                            seasons:[]
+                        }
+                        saveStaffList();
+                        msg.channel.send("la langue "+lngname+" a été ajouté avec succes a l'index "+langindex+" pour l'animé "+jsonanimelist[animeindex].name);
+                    }else{
+                        msg.channel.send("Erreur: l'index ne correspond a aucun animé");
+                    }
+                }else{
+                    msg.channel.send("Erreur: merci de respecter l'utilisation de cette commande");
+                }
+            }
+        }else if(msg.content.startsWith(config.prefix+"addseason ")){
+            var args = msg.content.split(config.prefix+"addseason ")[1].split(" ");
+            if(args.length >= 3){
+                if(!isNaN(args[0]) && args[0] <= 10 && args[0] >= 0 && !isNaN(args[1]) && args[1] <= 10 && args[1] >= 0){
+                    var animeindex = args[0];
+                    var langindex = args[1];
+                    args.shift();
+                    args.shift();
+                    var url = "";
+                    for(var arg in args){
+                        url = url+" "+args[arg];
+                    }
+                    url = url.substring(1,url.length);
+                    if(jsonanimelist[animeindex] != undefined && jsonanimelist[animeindex] != null){
+                        if(jsonanimelist[animeindex]["languages"][langindex] != undefined && jsonanimelist[animeindex]["languages"][langindex] != null){
+                            jsonanimelist[animeindex]["languages"][langindex]["seasons"].push(url);
+                            saveStaffList();
+                            msg.channel.send("la saison "+url+" a été ajouté avec succes a la langue "+jsonanimelist[animeindex]["languages"][langindex].name+" pour l'animé "+jsonanimelist[animeindex].name);
+                        }else{
+                            msg.channel.send("Erreur: l'index ne correspond a aucune langue");
+                        }
+                    }else{
+                        msg.channel.send("Erreur: l'index ne correspond a aucun animé");
+                    }
+                }else{
+                    msg.channel.send("Erreur: merci de respecter l'utilisation de cette commande");
+                }
+            }
         }
     }
     if(msg.content.startsWith(config.prefix+"credits")){
@@ -207,5 +342,51 @@ client.on('message', (msg) => {
             +"```"
             +"Code réalisé par **BurnGemios3643** alias <@262626115741286411> (patatoe02#1499)"+"\n"
             );
+    }else if(msg.content == config.prefix+"a"){
+        var message = "";
+        for(var i in jsonanimelist){
+            let maxseasons = 0;
+            let languages = "";
+            for(var lng in jsonanimelist[i].languages){
+                maxseasons = maxseasons < jsonanimelist[i].languages[lng].seasons.length?jsonanimelist[i].languages[lng].seasons.length:maxseasons;
+                languages = languages+", "+jsonanimelist[i].languages[lng].name;
+            }
+            languages = languages.substring(2, languages.length);
+            message = message+reactNumberMap.get(parseInt(i))+" - "+jsonanimelist[i].name+" - "+maxseasons+" saison(s) ["+languages+"]\n";
+        }
+        msg.channel.send(message).then(function (sended) {
+            for(var i in jsonanimelist){
+                sended.react(reactNumberMap.get(parseInt(i)));
+            }
+            sended.awaitReactions((reaction, user) => user.id != sended.author.id, { max: 1, time: 30000 }).then(collected => {
+                var lngmsg = "Choisissez votre langue:\n";
+                for(var lng in jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].languages){
+                    lngmsg = lngmsg+reactNumberMap.get(parseInt(lng))+" "+jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].languages[lng].name+"\n";
+                }
+                sended.channel.send(lngmsg).then(function (sendedLang) {
+                    for(var lng in jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].languages){
+                        sendedLang.react(reactNumberMap.get(parseInt(lng)));
+                    }
+                    sendedLang.awaitReactions((reaction, user) => user.id != sendedLang.author.id, { max: 1, time: 30000 }).then(ncollected => {
+                        var seasonSelectMessage = jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].name+" - "+jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].languages[getByValue(reactNumberMap,ncollected.first().emoji.name)].name+"\n";
+                        var seasonlist = jsonanimelist[getByValue(reactNumberMap,collected.first().emoji.name)].languages[getByValue(reactNumberMap,ncollected.first().emoji.name)].seasons;
+                        for(var i in seasonlist){
+                            let index = parseInt(i)+1;
+                            seasonSelectMessage = seasonSelectMessage+"saison "+reactNumberMap.get(parseInt(index))+" : "+seasonlist[i]+"\n";
+                        }
+                        sendedLang.channel.send(seasonSelectMessage).then(function (last) {
+                            last.suppressEmbeds(true);
+                        });
+                        sended.delete();
+                        sendedLang.delete();
+                    }).catch(() => {
+                        sended.delete();
+                        sendedLang.delete();
+                    });
+                });
+            }).catch(() => {
+                sended.delete();
+            });
+        });
     }
 });
