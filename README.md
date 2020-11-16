@@ -1,0 +1,2 @@
+# AnimeAlertBot
+![screen](/screen.png)
